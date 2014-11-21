@@ -5,13 +5,6 @@
 %represents the entire pressure side (high or low)
 %Finite Volume Lengths
 % Set to zero to remove pressure side from simulation
-
-%mesh size
-N_H=20;
-N_C=20;
-N_HX=100;
-%ambient conditions
-T_amb=75+460;
 %Solids
 start_HX=0;
 L_HX=50;
@@ -42,12 +35,11 @@ per_HX_o=20;
 Acs_HX_i=5;                         %in^2
 Acs_HX_o=5;                           %in^2
 %state_HX=zeros(N_HX,9);
-T_0_HX=T_amb*ones(length(N_HX),1);
 state_HX.type='solid';
 state_HX.mass=m_HX*ones(N_HX,1);
 state_HX.length=(L_HX/N_HX)*ones(N_HX,1);
-state_HX.enthalpy=T_0_HX.*m_HX.*Cp_HX*ones(N_HX,1);
-state_HX.temperature=T_0_HX*ones(N_HX,1);
+state_HX.enthalpy=T0_HX.*m_HX.*Cp_HX*ones(N_HX,1);
+state_HX.temperature=T0_HX*ones(N_HX,1);
 state_HX.density=rho_HX*ones(N_HX,1);
 state_HX.heataddition=zeros(N_HX,1);
 state_HX.alpha=k_HX*ones(N_HX,1);
@@ -70,13 +62,10 @@ disp(['Heat Exchanger Loaded...', wall_props.name,])
 state_H.geometry.breakpoints=[start_H,L_H];
 state_H.geometry.crosssections=Acs_HX_i;
 state_H.N=N_H;
-state_H.type='1phasefluid';
-state_H.entrance=1;
-state_H.exit=N_H;
 state_H.dimensions=1;
 state_H.name='Hot Fluid';
-state_H.alpha=.001*ones(N_H,1);
-state_H=firstmesh(state_H,0,'PAO',T_amb);
+state_H.alpha=.0005*ones(N_H,1);
+state_H=firstmesh(state_H,0,'PAO',T0_H);
 
 
 disp(['Hot Fluid Loaded...', state_H.fluid.name])
@@ -84,12 +73,9 @@ disp(['Hot Fluid Loaded...', state_H.fluid.name])
 state_C.geometry.breakpoints=[start_C,L_C];
 state_C.geometry.crosssections=Acs_HX_o;
 state_C.N=N_C;
-state_C.type='1phasefluid';
-state_C.entrance=N_C;
-state_C.exit=1;
 state_C.dimensions=1;
 state_C.name='Cold Fluid';
-state_C.alpha=.001*ones(N_C,1);
+state_C.alpha=.0005*ones(N_C,1);
 state_C=firstmesh(state_C,0,'PAO',T_amb);
 
 disp(['Cold Fluid Loaded...', state_C.fluid.name])
