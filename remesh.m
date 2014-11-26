@@ -33,7 +33,7 @@ for a=1:nf
     state.mesh(a+1)=state.mesh(a)+sum(Lf(a,:));
 end
 check=(sum(sum(Lf))-Ls)/Ls;
-if check > .1
-    %disp(['warning, mesh residual high in ',state.name])
-     %   disp(['length discrepancy=',num2str(check)])
+if check > .01
+    disp(['warning, mesh residual high in ',state.name])
+       disp(['length discrepancy=',num2str(check)])
 end

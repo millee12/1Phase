@@ -51,4 +51,4 @@ end
     %all other properties
     state=Props(state);
     %initialize values
-    state.heataddition=zeros(nf,1);
+    state.heatrate=zeros(nf,1);

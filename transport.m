@@ -60,4 +60,9 @@ if length(state.mass) ~= n
 elseif sum(state.mass) <= mn -0.01
     error(['transport changed mass in ',state.name])
 end
+%---------------------Calculate Values at Outlet-------------------%
+outlet.fluid=state.fluid;
+outlet.type=state.type;
+outlet.dimensions=0;
+outlet=Props(outlet);
 
