@@ -19,5 +19,5 @@ elseif strcmp(state.type,'2phasefluid')
         interp2DUG(state.fluid.PP,state.fluid.HH,state.fluid.Q_P_H,p,h);
 elseif strcmp(state.type,'1phasefluid')
     state.temperature=interp1DUG(state.fluid.HH,state.fluid.T_H,h);
-    state.density=interp1DUG(state.fluid.HH,state.fluid.D_H,h);
+    %state.density=interp1DUG(state.fluid.HH,state.fluid.D_H,h);
 end

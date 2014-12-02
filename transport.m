@@ -1,4 +1,5 @@
-function [state,outlet]=transport(outlet,inlet,state,dt,zeta)
+function [state,outlet]=transport(outlet,inlet,state)
+global dt zeta
 %% Assign Variables
 n=state.N;
 %inlet

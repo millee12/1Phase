@@ -1,12 +1,8 @@
 function [state_a,state_b,Qdot]=HX2(state_a,state_b,location)
 global dt
-%Define Parameters
-nela=state_a.N;
-nelb=state_b.N;
-Mrs=zeros(nela,nelb);
-Mls=zeros(nela,nelb);
-DT=zeros(nela,nelb);
-U=zeros(nela,nelb);
+nela=state_a.N;nelb=state_b.N;
+Mrs=zeros(nela,nelb);Mls=zeros(nela,nelb);
+DT=zeros(nela,nelb);U=zeros(nela,nelb);
 %perimeter data must come from solid
 if strcmp(state_a.type,'solid')
     per=eval(['state_a.',location,'.perimeter']);
@@ -31,8 +27,7 @@ Mint(Mint<0)=0;
 err=abs(sum(sum(Mint))-Lint)/Lint;
 %Check Interface
 if err > .001
-    disp('warning: large residual in interface calculator:')
-    disp(['residual= ',num2str(err)])
+    warning('large residual in interface calculator:')
 end
 Qdot=per*Mint.*U.*DT;
 %Add Heat to materials
